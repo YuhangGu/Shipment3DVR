@@ -6,71 +6,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="yuhang">
-
     <title>Shipment Visualization</title>
-
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/movementvis.css" rel="stylesheet">
     <link href="css/bootstrap-slider.css" rel="stylesheet">
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-
-
     <!-- D3 -->
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://d3js.org/d3.v4.js"></script>
-<script src="https://d3js.org/d3-axis.v1.min.js"></script>
-<script src="https://d3js.org/d3-array.v1.min.js"></script>
-<script src="https://d3js.org/d3-collection.v1.min.js"></script>
-<script src="https://d3js.org/d3-color.v1.min.js"></script>
-<script src="https://d3js.org/d3-format.v1.min.js"></script>
-<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-<script src="https://d3js.org/d3-time.v1.min.js"></script>
-<script src="https://d3js.org/d3-time-format.v2.min.js"></script>
-<script src="https://d3js.org/d3-scale.v1.min.js"></script>
-<script src="https://unpkg.com/d3-sankey@0"></script>
-<script src="https://cdn.rawgit.com/Neilos/bihisankey/master/bihisankey.js"></script>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="https://d3js.org/d3.v4.min.js"></script>
-<script src="https://d3js.org/d3-path.v1.min.js"></script>
-
-<!-- Three.js -->
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
-<script src="https://rawgit.com/mrdoob/three.js/master/examples/js/controls/TrackballControls.js"></script>
-<script src="https://rawgit.com/mrdoob/three.js/master/examples/js/renderers/CSS3DRenderer.js"></script>
-
-
-<!-- jQuery -->
-<script src="vendor/jquery/jquery.min.js"></script>
-<!-- JQ UI -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-<!-- Bootstrap Core JavaScript -->
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
-<script src="vendor/metisMenu/metisMenu.min.js"></script>
-
-
-<!-- Custom Theme JavaScript -->
-<script src="js/movement.js"></script>
-<script src="js/dataloading.js"></script>
-<script src="js/movementVis3D.js"></script>
-
-<!-- slider -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.js"></script>
-<script src="lib/three.min.js"></script>
-<script src="lib/tween.js"></script>
-<script src="lib/CSS3DRenderer.js"></script>
-<script src="lib/TrackballControls.js"></script>
-<script src="lib/three.js"></script>
-<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="https://rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
-<script src="https://rawgit.com/mrdoob/three.js/master/examples/js/controls/TrackballControls.js"></script>
-<script src="https://rawgit.com/mrdoob/three.js/master/examples/js/renderers/CSS3DRenderer.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-axis.v1.min.js"></script>
+    <script src="https://d3js.org/d3-array.v1.min.js"></script>
+    <script src="https://d3js.org/d3-collection.v1.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-format.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+    <script src="https://d3js.org/d3-scale.v1.min.js"></script>
+    <script src="https://unpkg.com/d3-sankey@0"></script>
+    <script src="https://cdn.rawgit.com/Neilos/bihisankey/master/bihisankey.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3-path.v1.min.js"></script>
+    <!-- Three.js -->
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
+    <script src="https://rawgit.com/mrdoob/three.js/master/examples/js/controls/TrackballControls.js"></script>
+    <script src="https://rawgit.com/mrdoob/three.js/master/examples/js/renderers/CSS3DRenderer.js"></script>
+    <!-- jQuery -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <!-- JQ UI -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/movement.js"></script>
+    <script src="js/dataloading.js"></script>
+    <script src="js/movementVis3D.js"></script>
+    <!-- slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.js"></script>
+    <script src="lib/three.min.js"></script>
+    <script src="lib/tween.js"></script>
+    <script src="lib/CSS3DRenderer.js"></script>
+    <script src="lib/TrackballControls.js"></script>
+    <script src="lib/three.js"></script>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
+    <script src="https://rawgit.com/mrdoob/three.js/master/examples/js/controls/TrackballControls.js"></script>
+    <script src="https://rawgit.com/mrdoob/three.js/master/examples/js/renderers/CSS3DRenderer.js"></script>
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -80,24 +68,23 @@
 </head>
 
 <body onload="migrationVis3DStart()">
-<div class="inner" align="center">
-    <h1>Shipment Flow Map</h1>
-    <ul class="nav nav-tabs"  text-align = "center" display="inline-block"  float ="none">
-        <li ><a href="index.html">2D</a></li>
-        <li class="active"><a href="page3D.html">3D</a></li>
-        <li ><a href="pageVR.html">VR</a></li>
-    </ul>
-</div>
-
-<div class= "site-wrapper">
-    <div class="site-wrapper-inner">
-        <div class="cover-container">
-            <div class="row" id="contentrowfor3D" >
-                <div id="flowmap3D"></div>
+    <div class="inner" align="center">
+        <h1>Shipment Flow Map</h1>
+        <ul class="nav nav-tabs" text-align="center" display="inline-block" float="none">
+            <li><a href="index.html">2D</a></li>
+            <li class="active"><a href="page3D.html">3D</a></li>
+            <li><a href="pageVR.html">VR</a></li>
+        </ul>
+    </div>
+    <div class="site-wrapper">
+        <div class="site-wrapper-inner">
+            <div class="cover-container">
+                <div class="row" id="contentrowfor3D">
+                    <div id="flowmap3D"></div>
+                </div>
             </div>
         </div>
     </div>
-</div>
-
 </body>
+
 </html>

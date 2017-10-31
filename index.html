@@ -1,61 +1,119 @@
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
     <meta charset="utf-8">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
-    <script src="https://aframe.io/releases/latest/aframe.min.js"></script>
-    <style>
-        body { margin:0;position:fixed;top:0;right:0;bottom:0;left:0; }
-    </style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="yuhang">
+
+    <title>Shipment Visualization</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/movementvis.css" rel="stylesheet">
+    <link href="css/bootstrap-slider.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 
-<body>
+<body onload="migrationVisStart()">
+<div class="inner">
+    <h1>Shipment Flow Map</h1>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="index.html">2D</a></li>
+        <li><a href="page3D.html">3D</a></li>
+        <li><a href="pageVR.html">VR</a></li>
+    </ul>
+    <!--nav class="nav nav-masthead">
+        <a class="nav-link active" href="#">Home</a>
+        <a class="nav-link" href="#">Features</a>
+        <a class="nav-link" href="#">Contact</a>
+    </nav-->
+</div>
 
-<a-scene>
-    <!--<a-cube position="0 0 -4" depth=1 height=0.1 width=100 color="#fff"></a-cube>-->
-    <a-light color="#da47da" position="0 0 0" type="ambient"></a-light>
-    <a-entity light="type: point; color: #EEE; intensity: 0.5" position="0 3 0"></a-entity>
-    <a-entity position="0 0 0" rotation="0 0 0">
-        <a-entity camera look-controls wasd-controls></a-entity>
-    </a-entity>
+<div class= "site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+            <div class="row" id="contentrow">
+                <div id="checkboxcontainer">
+                    <div class="radio" name="port" id="chck0">
+                        <label class="statuslabel">
+                            <input type="radio" name="optionsRadios" value="option1" checked>
+                            Port
+                        </label>
+                    </div>
+                    <div class="radio" name="country" id="chck1">
+                        <label class="statuslabel">
+                            <input type="radio" name="optionsRadios" value="option2">
+                            Country
+                        </label>
+                    </div>
+                </div>
+                <div id="migration-flowmap-2D"></div>
+                <div id="bottemCharts">
+                    <div id="barchartcontainer"></div>
+                    <div id="sliderbarcontainer">
+                        <input id="ex1" data-slider-id='ex1Slider' type="text"/>
+                    </div>
+                </div>
+                <div id="chrodChart"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
-    <!-- Sky -->
-    <a-sky color="#c8f7f0"></a-sky>
-</a-scene>
+<!-- D3 -->
+<script src="http://d3js.org/topojson.v0.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3.v4.js"></script>
+<script src="https://d3js.org/d3-axis.v1.min.js"></script>
+<script src="https://d3js.org/d3-array.v1.min.js"></script>
+<script src="https://d3js.org/d3-collection.v1.min.js"></script>
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-format.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-time.v1.min.js"></script>
+<script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+<script src="https://d3js.org/d3-scale.v1.min.js"></script>
+<script src="https://unpkg.com/d3-sankey@0"></script>
+<script src="https://cdn.rawgit.com/Neilos/bihisankey/master/bihisankey.js"></script>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://d3js.org/d3-path.v1.min.js"></script>
 
-<script>
-    // fake data
-    var data = [ 10, 20, 30, 15, 25, 35, 40,
-        45, 50, 70, 100, 120, 130,
-        12, 18, 22, 29, 33, 44, 59, 200]
+<!-- Three.js -->
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
+<script src="https://rawgit.com/mrdoob/three.js/master/examples/js/controls/TrackballControls.js"></script>
+<script src="https://rawgit.com/mrdoob/three.js/master/examples/js/renderers/CSS3DRenderer.js"></script>
 
-    var hscale = d3.scale.linear()
-        .domain([0, d3.max(data)])
-        .range([0,5])
 
-    var scene = d3.select("a-scene");
+<!-- jQuery -->
+<script src="vendor/jquery/jquery.min.js"></script>
+<!-- JQ UI -->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    var cubes = scene.selectAll("a-cube.bar")
-        .data(data);
-    cubes.enter().append("a-cube").classed("bar", true);
-    cubes.attr({
-        position: function(d,i) {
-            var radius = 10;
-            var theta = (i/data.length) * (2 * Math.PI)
-            var x = radius * Math.cos(theta);
-            var y = hscale(d)/2;
-            var z = radius * Math.sin(theta);
-            return x + " " + y + " " + z
-        },
-        rotation: function(d,i) {
-            var x = 0;
-            var y = -360 * i/data.length;
-            var z = 0;
-            return x + " " + y + " " + z
-        },
-        height: function(d,i) {
-            return hscale(d)
-        }
-    })
-</script>
+<!-- Bootstrap Core JavaScript -->
+<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="vendor/metisMenu/metisMenu.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+<script src="js/movement.js"></script>
+<script src="js/dataloading.js"></script>
+<script src="js/movementVis2D.js"></script>
+
+<!-- slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.js"></script>
 </body>
-
+</html>

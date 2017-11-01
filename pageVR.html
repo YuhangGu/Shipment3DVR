@@ -1,14 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="yuhang">
+
     <title>Shipment Visualization</title>
+
     <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-geojson-component/dist/aframe-geojson-component.min.js"></script>
+
     <script src="http://d3js.org/topojson.v0.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3.v4.js"></script>
@@ -25,44 +27,69 @@
     <script src="http://d3js.org/d3.v3.min.js"></script>
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-path.v1.min.js"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="js/movement.js"></script>
     <script src="js/dataloading.js"></script>
     <script src="js/movementVisVR.js"></script>
+
+
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/movementvis.css" rel="stylesheet">
     <link href="css/bootstrap-slider.css" rel="stylesheet">
+
 </head>
 
 <body>
-    <div class="inner" align="center">
-        <h1>Shipment Flow Map</h1>
-        <ul class="nav nav-tabs" text-align="center" display="inline-block" float="none">
-            <li><a href="index.html">2D</a></li>
-            <li><a href="page3D.html">3D</a></li>
-            <li class="active"><a href="pageVR.html">VR</a></li>
-        </ul>
-    </div>
-    <script>
-    init();
-    </script>
-    <a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
-        <a-assets>
-            <a-asset-item id="world-geojson" src="data/countries.geojson" />
-        </a-assets>
-        <a-entity id="basemap" position="-4 2 -2" geometry="primitive: plane; width: 8; height: 4" material="color: #87765D" geojson="src: #world-geojson; topologyObject: countries; projection: geoMercator" flows="linewidth: 0.2">
-        </a-entity>
-        <a-entity position="0 -0.2 -2.1" geometry="primitive: plane; width: 10; height: 8" material="color: #87765D; side = double">
-        </a-entity>
-        <a-entity position="0 0 5" rotation="0 0 0">
-            <a-camera user-height='0' position="0 -4 0" rotation="30 0 0" reverse-mouse-drag="ture"></a-camera>
-        </a-entity>
-        <a-sky color="#3D3252"></a-sky>
-    </a-scene>
-    <script>
-    migrationVisVRStart();
-    </script>
-</body>
 
+<div class="inner" align="center">
+    <h1>Shipment Flow Map</h1>
+    <ul class="nav nav-tabs"  text-align = "center" display="inline-block"  float ="none">
+        <li ><a href="index.html">2D</a></li>
+        <li><a href="page3D.html">3D</a></li>
+        <li class="active"><a href="pageVR.html">VR</a></li>
+    </ul>
+</div>
+
+
+<script>
+    init();
+</script>
+
+<a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
+    <a-assets>
+        <a-asset-item id="world-geojson" src="data/countries.geojson" />
+    </a-assets>
+
+    <a-entity
+            id = "basemap"
+            position="-4 2 -2"
+            geometry="primitive: plane; width: 8; height: 4"
+            material="color: #87765D"
+            geojson="src: #world-geojson; topologyObject: countries; projection: geoMercator"
+            flows = "linewidth: 0.2">
+    </a-entity>
+    <a-entity
+            position="0 -0.2 -2.1"
+            geometry="primitive: plane; width: 10; height: 8"
+            material="color: #87765D; side = double">
+    </a-entity>
+
+    <a-entity position= "0 0 5" rotation = "0 0 0">
+        <a-camera user-height = '0'
+                  position = "0 -4 0"
+                  rotation = "30 0 0"
+                  reverse-mouse-drag = "ture"></a-camera>
+    </a-entity>
+
+    <a-sky color = "#3D3252"></a-sky>
+
+</a-scene>
+
+<script>
+    migrationVisVRStart();
+</script>
+
+</body>
 </html>

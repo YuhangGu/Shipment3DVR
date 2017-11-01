@@ -245,9 +245,15 @@ function initializeFlowmap(callback1,callback2) {
         .attr("transform", "rotate(0,180,180)");
 
     // interaction
+    /*
     Vis.zoom = d3.behavior.zoom()
         .translate([0, 0])
         .scale(1)
+        .scaleExtent([1, 8])
+        .on("zoom", zoomed);
+        */
+
+    Vis.zoom = d3.zoom()
         .scaleExtent([1, 8])
         .on("zoom", zoomed);
 
@@ -278,14 +284,13 @@ function initializeFlowmap(callback1,callback2) {
         .attr("stop-opacity", 1);
 
 
-    var bezierLine = d3.svg.line()
+    var bezierLine = d3.line()
         .x(function (d) {
             return d[0];
         })
         .y(function (d) {
             return d[1];
-        })
-        .interpolate("basis");
+        });
 
 
 
@@ -425,7 +430,7 @@ function initChordChart(){
 
 function draw2DBasemapWorld() {
 
-    var path = d3.geo.path().projection(Vis.projection);
+    var path = d3.geoPath().projection(Vis.projection);
 
 
     Vis.g_basemap2D.selectAll("path")

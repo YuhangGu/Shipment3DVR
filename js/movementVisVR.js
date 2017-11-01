@@ -15,43 +15,49 @@ function init() {
 
             brithToResData.placesFlows.forEach(function (d, i) {
 
-                if(d[0] == d[2] && d[1] == d[3]){
+                if(i < 100){
 
+
+                    if(d[0] == d[2] && d[1] == d[3]){
+
+                    }
+                    else{
+
+                        var pointOrigin         = projection([   parseFloat(d[1]),  parseFloat(d[0]) ]);
+                        var pointDestination    = projection([   parseFloat(d[3]),  parseFloat(d[2]) ]);
+
+
+                        var origin = new THREE.Vector3( pointOrigin[0] , -pointOrigin[1] , 0);
+                        var destination = new THREE.Vector3( pointDestination[0] ,  -pointDestination[1] , 0);
+
+                        var ctrl1 = new THREE.Vector3( pointOrigin[0]/4*3 + pointDestination[0]/4,
+                            - pointOrigin[1]/4*3 -pointDestination[1]/4,
+                            0.5 * d[4]  );
+
+                        var ctrl2 = new THREE.Vector3(  pointOrigin[0]/4 + pointDestination[0]/4*3,
+                            - pointOrigin[1]/4 -pointDestination[1]/4*3,
+                            0.5 * d[4]   );
+
+                        var curve = new THREE.CubicBezierCurve3(
+                            origin,ctrl1,ctrl2,destination
+                        );
+
+                        var geometry = new THREE.Geometry();
+                        geometry.vertices = curve.getPoints( 50 );
+
+                        var material = new THREE.LineBasicMaterial({
+                            color: "#2095e2",
+                            linewidth: 1
+                        });
+
+                        var curveObject = new THREE.Line( geometry, material );
+
+                        group.add(curveObject);
+
+                    }
                 }
-                else{
-
-                    var pointOrigin         = projection([   parseFloat(d[1]),  parseFloat(d[0]) ]);
-                    var pointDestination    = projection([   parseFloat(d[3]),  parseFloat(d[2]) ]);
 
 
-                    var origin = new THREE.Vector3( pointOrigin[0] , -pointOrigin[1] , 0);
-                    var destination = new THREE.Vector3( pointDestination[0] ,  -pointDestination[1] , 0);
-
-                    var ctrl1 = new THREE.Vector3( pointOrigin[0]/4*3 + pointDestination[0]/4,
-                        - pointOrigin[1]/4*3 -pointDestination[1]/4,
-                        0.5 * d[4]  );
-
-                    var ctrl2 = new THREE.Vector3(  pointOrigin[0]/4 + pointDestination[0]/4*3,
-                        - pointOrigin[1]/4 -pointDestination[1]/4*3,
-                        0.5 * d[4]   );
-
-                    var curve = new THREE.CubicBezierCurve3(
-                        origin,ctrl1,ctrl2,destination
-                    );
-
-                    var geometry = new THREE.Geometry();
-                    geometry.vertices = curve.getPoints( 50 );
-
-                    var material = new THREE.LineBasicMaterial({
-                        color: "#2095e2",
-                        linewidth: 1
-                    });
-
-                    var curveObject = new THREE.Line( geometry, material );
-
-                    group.add(curveObject);
-
-                }
 
             });
 

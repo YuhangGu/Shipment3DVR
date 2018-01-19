@@ -13,6 +13,8 @@ function init() {
 
             var group = new THREE.Group();
 
+
+            console.log("brithToResData",brithToResData);
             brithToResData.placesFlows.forEach(function (d, i) {
 
                 if(i < 100){

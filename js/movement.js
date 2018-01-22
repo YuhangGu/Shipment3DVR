@@ -48,7 +48,7 @@ function migrationVis3DStart(e){
 
 function migrationVisVRStart(e){
 
-    loadWorldGeoData(function(){
+    loadWorldGeoDataVR(function(){
 
         loadShipment( function(){
             initVR();

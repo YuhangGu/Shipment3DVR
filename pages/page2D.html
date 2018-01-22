@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="yuhang">
+
+    <title>Shipment Visualization</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+    <!-- Custom CSS -->
+    <link href="../css/movementvis.css" rel="stylesheet">
+    <link href="../css/bootstrap-slider.css" rel="stylesheet">
+
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/d3-axis.v1.min.js"></script>
+    <script src="https://d3js.org/d3-array.v1.min.js"></script>
+    <script src="https://d3js.org/d3-collection.v1.min.js"></script>
+    <script src="https://d3js.org/d3-color.v1.min.js"></script>
+    <script src="https://d3js.org/d3-format.v1.min.js"></script>
+    <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
+    <script src="https://d3js.org/d3-scale.v1.min.js"></script>
+    <script src="https://d3js.org/d3-zoom.v1.min.js"></script>
+    <script src="https://d3js.org/d3-path.v1.min.js"></script>
+    <script src="https://d3js.org/d3-shape.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo.v1.min.js"></script>
+    <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+
+    <!-- jQuery -->
+    <!--script src="http://code.jquery.com/jquery-2.1.4.min.js"></script-->
+    <script src="../vendor/jquery/jquery.min.js"></script>
+
+    <!-- JQ UI -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../js/movement.js"></script>
+    <script src="../js/dataloading.js"></script>
+    <script src="../js/movementVis2D.js"></script>
+
+    <!-- slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/9.8.0/bootstrap-slider.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body onload="migrationVisStart()">
+
+<div class="inner">
+    <h1>Shipment Flow Map</h1>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="page2D.html">2D</a></li>
+        <li><a href="page3D.html">3D</a></li>
+        <li><a href="pageVR.html">VR</a></li>
+    </ul>
+</div>
+
+<div class= "site-wrapper">
+    <div class="site-wrapper-inner">
+        <div class="cover-container">
+            <div class="row" id="contentrow">
+                <div id="checkboxcontainer">
+                    <div class="radio" name="port" id="chck0">
+                        <label class="statuslabel">
+                            <input type="radio" name="optionsRadios" value="option1" checked>
+                            Port
+                        </label>
+                    </div>
+                    <div class="radio" name="country" id="chck1">
+                        <label class="statuslabel">
+                            <input type="radio" name="optionsRadios" value="option2">
+                            Country
+                        </label>
+                    </div>
+                </div>
+                <div id="migration-flowmap-2D"></div>
+                <div id="bottemCharts">
+                    <div id="barchartcontainer"></div>
+                    <div id="sliderbarcontainer">
+                        <input id="ex1" data-slider-id='ex1Slider' type="text"/>
+                    </div>
+                </div>
+                <div id="chrodChart"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,7 +1,3 @@
-/**
- * Created by Aero on 09/03/2017.
- */
-
 var Vis = {
     //ID & configurations
 
@@ -226,10 +222,6 @@ function initBarChart() {
 //--------------- init flowmap ------------------
 function initializeFlowmap(callback1,callback2) {
 
-    //console.log(brithToResData);
-
-
-    //console.log(Vis.locationStructureRoutes.object());
 
     Vis.linerValueScale = d3.scaleLinear().domain([0,maxForScale]).range([0,20]);
 
@@ -260,7 +252,6 @@ function initializeFlowmap(callback1,callback2) {
     Vis.g_basemap2D = Vis.svgFlows.append("g").attr("class", "basemap");
 
     Vis.g_flows2D = Vis.svgFlows.append("g");
-
 
     // set the gradient color
     Vis.g_gradient = Vis.g_flows2D.append("defs")
@@ -319,10 +310,9 @@ function initializeFlowmap(callback1,callback2) {
 */
 
 
+
    Vis.gFlows = Vis.svgFlows.selectAll("g").data(brithToResData.placesFlows)
        .enter().append("g");
-
-
 
    Vis.gFlows.each(function ( el) {
 
@@ -353,7 +343,6 @@ function initializeFlowmap(callback1,callback2) {
        }
 
    });
-
 
 
    /*

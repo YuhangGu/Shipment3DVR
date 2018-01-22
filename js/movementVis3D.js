@@ -1,4 +1,3 @@
-
 var graphics3D = {
     //doc div parameters
     //windowdiv_width: $("#flowmap3D").width(),
@@ -71,6 +70,8 @@ var graphics3D = {
     gFlows : null,
 }
 
+var positions = [];
+var indices = [];
 
 //--------------- main ---------------
 function visualizeIn3D() {
@@ -182,125 +183,89 @@ function initialize() {
 }
 
 
-
-function drawFlows_bak30thOCT(){
-
-    brithToResData.placesFlows.forEach(function (d) {
-
-        var p1 = graphics3D.projection( [   parseFloat(d[1]),  parseFloat(d[0]) ]);
-        var p2 = graphics3D.projection( [   parseFloat(d[3]),  parseFloat(d[2]) ]);
-
-        var origin = new THREE.Vector3( p1[0] - graphics3D.map_width/2 ,  graphics3D.map_height / 2 - p1[1] , 20);
-        var destination = new THREE.Vector3( p2[0] - graphics3D.map_width/2 ,  graphics3D.map_height / 2-  p2[1] , 20);
-
-        var middle = new THREE.Vector3(     (origin.x + destination.x )/2 ,
-                                            (origin.y + destination.y)/2 ,   800);
-
-        var material = new THREE.LineBasicMaterial({
-            color: "#2095e2",
-            linewidth: 2});
-
-        var geometry = new THREE.Geometry();
-        geometry.vertices.push(origin);
-        geometry.vertices.push(middle);
-        geometry.vertices.push(destination);
-
-        var line = new THREE.Line(geometry, material);
-        graphics3D.glScene.add(line);
-    });
-
-}
-
-function drawFlows(){
-
-    //console.log(" brithToResData.placesFlows",  brithToResData.placesFlows.length);
-    var length = brithToResData.placesFlows.length;
-
-
-    //var flowsArray = new Float32Array(length * 6);
-    var flowsArray = new Float32Array(length * 9);
-    var indexArray = new Uint16Array(length * 3);
-
-    brithToResData.placesFlows.forEach(function (d,i) {
-
-        var p1 = graphics3D.projection( [   parseFloat(d[1]),  parseFloat(d[0]) ]);
-        var p2 = graphics3D.projection( [   parseFloat(d[3]),  parseFloat(d[2]) ]);
-
-        flowsArray[i*9 + 0] = p1[0] - graphics3D.map_width/2;
-        flowsArray[i*9 + 1] = graphics3D.map_height / 2 - p1[1];
-        flowsArray[i*9 + 2] = 5;
-
-        flowsArray[i*9 + 3] =   ( p1[0] + p2[0])/2 - graphics3D.map_width/2;
-        flowsArray[i*9 + 4] =  graphics3D.map_height/2 -( p1[1]+p2[1])/2;
-        flowsArray[i*9 + 5] = 500;
-
-        flowsArray[i*9 + 6] = p2[0] - graphics3D.map_width/2;
-        flowsArray[i*9 + 7] =  graphics3D.map_height / 2 - p2[1];
-        flowsArray[i*9 + 8] = 5;
-
-        indexArray[i*3] = i;
-        indexArray[i*3 + 1] = i+1;
-        indexArray[i*3 + 2] = i+2;
-    });
-
-    var material = new THREE.LineBasicMaterial({
-        color: "#2095e2",
-        linewidth: 1
-    });
-
-    var geometry = new THREE.BufferGeometry();
-    geometry.addAttribute( 'position', new THREE.BufferAttribute( flowsArray, 3 ) );
-    //geometry.setIndex(new THREE.BufferAttribute(indexArray, 1));
-    var mesh = new THREE.LineSegments( geometry, material);
-
-    graphics3D.glScene.add(mesh);
-}
-
 function drawFlowsCurved(){
 
     var group = new THREE.Group();
 
     brithToResData.placesFlows.forEach(function (d, i) {
 
-
         if(d[0] == d[2] && d[1] == d[3]){
 
-            //console.log(d);
         }
         else{
             var p1 = graphics3D.projection( [   parseFloat(d[1]),  parseFloat(d[0]) ]);
             var p2 = graphics3D.projection( [   parseFloat(d[3]),  parseFloat(d[2]) ]);
 
-            var origin = new THREE.Vector3( p1[0] - graphics3D.map_width/2 ,  graphics3D.map_height / 2 - p1[1] , 20);
-            var destination = new THREE.Vector3( p2[0] - graphics3D.map_width/2 ,  graphics3D.map_height / 2-  p2[1] , 20);
+            var origin = new THREE.Vector3( p1[0] - graphics3D.map_width/2 ,  graphics3D.map_height / 2 - p1[1] , 1);
+            var destination = new THREE.Vector3( p2[0] - graphics3D.map_width/2 ,  graphics3D.map_height / 2-  p2[1] , 1);
 
             var ctrl1 = new THREE.Vector3( 3*p1[0]/4 + p2[0]/4 - graphics3D.map_width/2,
                 graphics3D.map_height / 2 - (3*p1[1]/4 + p2[1]/4),
-                100 * d[4]);
+                20 * d[4]);
             var ctrl2 = new THREE.Vector3( p1[0]/4 + 3*p2[0]/4 - graphics3D.map_width/2,
                 graphics3D.map_height / 2 - (   p1[1]/4 + 3*p2[1]/4 )
-                ,  100 * d[4] );
+                ,  20 * d[4] );
 
+
+
+            /*
             var material = new THREE.LineBasicMaterial({
                 color: "#2095e2",
                 linewidth: 2});
+
+            var geometry = new THREE.Geometry();
+            geometry.vertices = curve.getPoints( 10 );*/
+
 
             var curve = new THREE.CubicBezierCurve3(
                 origin,ctrl1,ctrl2,destination
             );
 
+
+            var vx =  curve.getPoints( 10 );
+
+
+            for(var k = 0 ; k< 11; k ++){
+                positions.push(vx[k].x, vx[k].y, vx[k].z);
+            }
+
+            var count = positions.length/3;
+
+            //console.log("count",count);
+            indices.push(   count - 1 , count - 2,
+                count - 2 , count - 3,
+                count - 3 , count - 4,
+                count - 4 , count - 5,
+                count - 5 , count - 6,
+                count - 6 , count - 7,
+                count - 7 , count - 8,
+                count - 8 , count - 9,
+                count - 9 , count - 10,
+                count - 10 , count - 11);
+
+
+            /*
             var geometry = new THREE.Geometry();
             geometry.vertices = curve.getPoints( 50 );
 
             var curveObject = new THREE.Line( geometry, material );
 
-            group.add(curveObject);
+            group.add(curveObject);*/
 
         }
 
     });
 
-    graphics3D.glScene.add(group);
+    var geometry = new THREE.BufferGeometry();
+    var material = new THREE.LineBasicMaterial( {  color: "#2095e2",
+        linewidth: 2} );
+
+    geometry.addAttribute( 'position', new THREE.Float32BufferAttribute( positions, 3 ) );
+    geometry.setIndex(new THREE.BufferAttribute(new Uint16Array(indices), 1));
+
+    var mesh = new THREE.LineSegments( geometry, material );
+
+    graphics3D.glScene.add(mesh);
 }
 
 

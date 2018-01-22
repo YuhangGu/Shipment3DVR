@@ -116,7 +116,8 @@ function createMap() {
         .translate([graphics3D.map_width / 2, graphics3D.map_height / 2])
         .precision(.1);;
 
-    var path = d3.geo.path().projection(graphics3D.projection);
+    //var path = d3.geo.path().projection(graphics3D.projection);
+    var path = d3.geoPath().projection(graphics3D.projection);
 
     var basemap = svgbasemap.append("g").attr("class", "basemap3D");
 

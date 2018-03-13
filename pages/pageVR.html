@@ -8,12 +8,18 @@
 
     <title>Shipment Visualization</title>
 
-    <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
-    <script src="https://unpkg.com/aframe-geojson-component/dist/aframe-geojson-component.min.js"></script>
 
-    <script src="http://d3js.org/topojson.v0.min.js"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- JQ UI -->
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+
+    <!-- D3 -->
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3.v4.js"></script>
+    <script src="https://d3js.org/topojson.v0.min.js"></script>
     <script src="https://d3js.org/d3-axis.v1.min.js"></script>
     <script src="https://d3js.org/d3-array.v1.min.js"></script>
     <script src="https://d3js.org/d3-collection.v1.min.js"></script>
@@ -23,21 +29,33 @@
     <script src="https://d3js.org/d3-time.v1.min.js"></script>
     <script src="https://d3js.org/d3-time-format.v2.min.js"></script>
     <script src="https://d3js.org/d3-scale.v1.min.js"></script>
+    <script src="https://unpkg.com/d3-sankey@0"></script>
     <script src="https://cdn.rawgit.com/Neilos/bihisankey/master/bihisankey.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://d3js.org/d3-path.v1.min.js"></script>
+
+    <!-- Three.js -->
+    <script src="https://rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
+    <script src="https://rawgit.com/mrdoob/three.js/master/examples/js/controls/TrackballControls.js"></script>
+    <script src="https://rawgit.com/mrdoob/three.js/master/examples/js/renderers/CSS3DRenderer.js"></script>
+
+
+    <!-- a-frame.js -->
+    <script src="https://aframe.io/releases/0.6.0/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-geojson-component/dist/aframe-geojson-component.min.js"></script>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"> </script>
+
 
     <!-- Custom Theme JavaScript -->
     <script src="../js/movement.js"></script>
     <script src="../js/dataloading.js"></script>
     <script src="../js/movementVisVR.js"></script>
 
-
-    <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../css/movementvis.css" rel="stylesheet">
-    <link href="../css/bootstrap-slider.css" rel="stylesheet">
 
 </head>
 
@@ -46,7 +64,7 @@
 <div class="inner" align="center">
     <h1>Shipment Flow Map</h1>
     <ul class="nav nav-tabs"  text-align = "center" display="inline-block"  float ="none">
-        <li ><a href="index.html">2D</a></li>
+        <li ><a href="page2D.html">2D</a></li>
         <li><a href="page3D.html">3D</a></li>
         <li class="active"><a href="pageVR.html">VR</a></li>
     </ul>
@@ -60,7 +78,7 @@
 
 <a-scene inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js">
     <a-assets>
-        <a-asset-item id="world-geojson" src="../data/countries.geojson" />
+        <a-asset-item id="world-geojson" src="../data/countries.json" />
     </a-assets>
 
     <a-entity

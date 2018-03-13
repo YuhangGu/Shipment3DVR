@@ -3,13 +3,21 @@
  */
 var dataWorldGeo;
 var dataShipment;
+var maxshiplines = 0;
+var matrixNameList;
+var matrix;
+var allports;
+
+var yearStatisticsData;
+
+
+//-----will be dropped
 var citynameIndexMap = [];
 
 
 var lastSelectedCity = null;
 var selectedCity = null;
 var drawingallSwith = true;
-
 
 var cargolistforcolorScale = [];
 
@@ -23,13 +31,10 @@ var currentYear = -1;
 
 var brithToResData = [];
 
-function migrationVisStart(e){
+function initShipmentVis2D(e){
 
     loadWorldGeoData(function(){
-
-        loadShipment( function(){
-            init();
-        });
+        loadShipmentData(visualizeIn2D);
 
     } );
 }
@@ -39,34 +44,17 @@ function migrationVis3DStart(e){
 
     loadWorldGeoData(function(){
 
-        loadShipment( function(){
+        loadShipmentData( function(){
             init3D();
         });
 
     } );
 }
 
-function migrationVisVRStart(e){
 
-    loadWorldGeoDataVR(function(){
-
-        loadShipment( function(){
-            initVR();
-        });
-
-    } );
-}
-
-function init(){
-    visualizeIn2D();
-}
 
 function init3D() {
     visualizeIn3D();
-}
-
-function initVR(){
-    visualizeInVR();
 }
 
 

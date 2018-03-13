@@ -33,9 +33,22 @@
     <script src="https://d3js.org/d3-geo.v1.min.js"></script>
     <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
 
+    <script src="https://d3js.org/d3-dispatch.v1.min.js"></script>
+    <script src="https://d3js.org/d3-selection.v1.min.js"></script>
+    <script src="https://d3js.org/d3-drag.v1.min.js"></script>
+    <script src="https://d3js.org/d3-zoom.v1.min.js"></script>
+
+    <script src="https://d3js.org/d3-timer.v1.min.js"></script>
+    <script src="https://d3js.org/d3-transition.v1.min.js"></script>
+
+
+    <!--script src="../lib/jquery.csv.min"></script-->
+
     <!-- jQuery -->
     <!--script src="http://code.jquery.com/jquery-2.1.4.min.js"></script-->
     <script src="../vendor/jquery/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-csv/0.71/jquery.csv-0.71.min.js"></script>
+
 
     <!-- JQ UI -->
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -60,7 +73,7 @@
     <![endif]-->
 </head>
 
-<body onload="migrationVisStart()">
+<body onload="initShipmentVis2D()">
 
 <div class="inner">
     <h1>Shipment Flow Map</h1>
@@ -71,24 +84,10 @@
     </ul>
 </div>
 
-<div class= "site-wrapper">
+<div class="site-wrapper">
     <div class="site-wrapper-inner">
         <div class="cover-container">
             <div class="row" id="contentrow">
-                <div id="checkboxcontainer">
-                    <div class="radio" name="port" id="chck0">
-                        <label class="statuslabel">
-                            <input type="radio" name="optionsRadios" value="option1" checked>
-                            Port
-                        </label>
-                    </div>
-                    <div class="radio" name="country" id="chck1">
-                        <label class="statuslabel">
-                            <input type="radio" name="optionsRadios" value="option2">
-                            Country
-                        </label>
-                    </div>
-                </div>
                 <div id="migration-flowmap-2D"></div>
                 <div id="bottemCharts">
                     <div id="barchartcontainer"></div>
@@ -97,6 +96,7 @@
                     </div>
                 </div>
                 <div id="chrodChart"></div>
+                <div id="pieChart"></div>
             </div>
         </div>
     </div>
